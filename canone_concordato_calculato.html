@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calcolatore Canone Concordato Firenze</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Helvetica, Arial, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 30px;
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            gap: 30px;
+        }
+
+        .form-section {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            margin-bottom: 20px;
+            border-left: 4px solid #4facfe;
+            transition: transform 0.2s ease;
+        }
+
+        .form-section:hover {
+            transform: translateY(-2px);
+        }
+
+        .form-section h3 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 1.3em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+            font-weight: 500;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e1e5e9;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background: #f8f9fa;
+        }
+
+        .form-group input:focus, .form-group select:focus {
+            outline: none;
+            border-color: #4facfe;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(79, 172, 254, 0.1);
+        }
+
+        .surface-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .checkbox-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border: 1px solid #e1e5e9;
+            transition: all 0.2s ease;
+        }
+
+        .checkbox-item:hover {
+            background: #e9ecef;
+        }
+
+        .checkbox-item input[type="checkbox"] {
+            width: auto;
+            margin: 0;
+        }
+
+        .results {
+            position: sticky;
+            top: 20px;
+            height: fit-content;
+        }
+
+        .result-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .result-card h3 {
+            margin-bottom: 20px;
+            font-size: 1.4em;
+            text-align: center;
+        }
+
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            backdrop-filter: blur(10px);
+        }
+
+        .result-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .result-value {
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+        .final-result {
+            background: linear-gradient(135deg, #ff6b6b 0%, #feca57 100%);
+            text-align: center;
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 15px;
+        }
+
+        .final-result .price-range {
+            font-size: 2em;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .warning {
+            background: #fff3cd;
+            color: #856404;
+            padding: 12px;
+            border-radius: 8px;
+            border-left: 4px solid #ffc107;
+            margin-top: 10px;
+            font-size: 0.9em;
+        }
+
+        .info-text {
+            font-size: 0.9em;
+            color: #666;
+            margin-top: 5px;
+            font-style: italic;
+        }
+
+        @media (max-width: 768px) {
+            .content {
+                grid-template-columns: 1fr;
+            }
+            
+            .surface-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .container {
+                margin: 10px;
+            }
+        }
+
+        .btn-calculate {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 20px;
+            transition: transform 0.2s ease;
+        }
+
+        .btn-calculate:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(79, 172, 254, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏠 Calcolatore Canone Concordato</h1>
+            <p>⚜️ Comune di Firenze - Calcolo automatico del canone di locazione</p>
+        </div>
+
+        <div class="content">
+            <div class="form-container">
+                <!-- Sezione Quartiere -->
+                <div class="form-section">
+                    <h3>📍 Ubicazione</h3>
+                    <div class="form-group">
+                        <label for="quartiere">Quartiere:</label>
+                        <select id="quartiere">
+                            <option value="">Seleziona quartiere</option>
+                            <option value="centro">Centro Storico, Lungarno, Piazza Ferrucci</option>
+                            <option value="bobolino">Bobolino, Due Strade, Marignolle, La Pietra, Careggi, Settignano</option>
+                            <option value="poggetto">Poggetto, Cure, Campo di Marte, Madonnone/Bellariva, Bandino, Nave a Rovezzano, Novoli, Coverciano, Varlungo</option>
+                            <option value="sanjacopino">San Jacopino, Dalmazia, Cascine del Riccio, Galluzzo</option>
+                            <option value="legnaia">Legnaia, Isolotto, Argingrosso, Castello</option>
+                            <option value="piagge">Piagge, Peretola, Mantignano, Cupolina</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Sezione Superficie -->
+                <div class="form-section">
+                    <h3>📐 Calcolo Superficie Convenzionale</h3>
+                    <div class="surface-grid">
+                        <div class="form-group">
+                            <label for="surfaceA">A - Superficie interna utile abitativa (mq):</label>
+                            <input type="number" id="surfaceA" step="0.1" min="0">
+                            <div class="info-text">100% - Area effettivamente calpestabile (h≥240cm)</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="surfaceA1">A1 - Superficie bassa (mq):</label>
+                            <input type="number" id="surfaceA1" step="0.1" min="0">
+                            <div class="info-text">30% - Aree interne h 180-240cm</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="surfaceB">B - Autorimesse/box auto (mq):</label>
+                            <input type="number" id="surfaceB" step="0.1" min="0">
+                            <div class="info-text">50% - Superficie utile autorimesse singole</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="surfaceC">C - Lastrici solari attico (mq):</label>
+                            <input type="number" id="surfaceC" step="0.1" min="0">
+                            <div class="info-text">25% - Uso esclusivo piano attico</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="surfaceD">D - Posti auto esclusivi (mq):</label>
+                            <input type="number" id="surfaceD" step="0.1" min="0">
+                            <div class="info-text">30% - Coperti/scoperti in area esclusiva</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="surfaceE">E - Posti auto comuni coperti (mq):</label>
+                            <input type="number" id="surfaceE" step="0.1" min="0">
+                            <div class="info-text">25% - Autorimesse comuni assegnate</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="surfaceF">F - Posti auto comuni scoperti (mq):</label>
+                            <input type="number" id="surfaceF" step="0.1" min="0">
+                            <div class="info-text">20% - Spazi comuni assegnati</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="surfaceG">G - Posti auto turnari (mq):</label>
+                            <input type="number" id="surfaceG" step="0.1" min="0">
+                            <div class="info-text">5% - Rotazione turnaria</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="surfaceH">H - Balconi, terrazze, cantine (mq):</label>
+                            <input type="number" id="surfaceH" step="0.1" min="0">
+                            <div class="info-text">25% - Superficie utile pertinenze</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="surfaceI">I - Superficie scoperta esclusiva (mq):</label>
+                            <input type="number" id="surfaceI" step="0.1" min="0">
+                            <div class="info-text">10% - Corti, giardini in godimento esclusivo</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sezione Tipologia -->
+                <div class="form-section">
+                    <h3>🏗️ Tipologia Alloggio</h3>
+                    <div class="form-group">
+                        <label for="tipologia">Tipologia:</label>
+                        <select id="tipologia">
+                            <option value="">Seleziona tipologia</option>
+                            <option value="A">Tipologia A - Immobili di recente costruzione/ristrutturazione</option>
+                            <option value="B">Tipologia B - Immobili con buone caratteristiche</option>
+                            <option value="C">Tipologia C - Immobili con caratteristiche standard</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Caratteristiche aggiuntive per Tipologia A (almeno 6):</label>
+                        <div class="checkbox-group">
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="condizionamento">
+                                <label for="condizionamento">Condizionamento</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="rifiniture">
+                                <label for="rifiniture">Rifiniture di pregio</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="doppiservizi">
+                                <label for="doppiservizi">Doppi servizi</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="parcheggio">
+                                <label for="parcheggio">Parcheggio assegnato</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="spaziesterni">
+                                <label for="spaziesterni">Spazi esterni</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="allarme">
+                                <label for="allarme">Sistema allarme</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="portierato">
+                                <label for="portierato">Portierato/Videosorveglianza</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="fibra">
+                                <label for="fibra">Fibra ottica FTTH</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="blindato">
+                                <label for="blindato">Portone blindato</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="ascensore">
+                                <label for="ascensore">Ascensore</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="verdi">
+                                <label for="verdi">Spazi verdi</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="fotovoltaico">
+                                <label for="fotovoltaico">Fotovoltaico/Solare</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sezione Maggiorazioni -->
+                <div class="form-section">
+                    <h3>⬆️ Maggiorazioni</h3>
+                    <div class="form-group">
+                        <label for="arredo">Arredo:</label>
+                        <select id="arredo">
+                            <option value="0">Non arredato</option>
+                            <option value="7">Arredato per 1/3 dei vani (+7%)</option>
+                            <option value="10">Arredato per 2/3 dei vani (+10%)</option>
+                            <option value="15">Completamente arredato (+15%)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="pregio">Immobile di particolare pregio:</label>
+                        <select id="pregio">
+                            <option value="0">No</option>
+                            <option value="10">A/7 - Villini (+10%)</option>
+                            <option value="15">Particolare pregio (+15%)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="energia">Classe energetica:</label>
+                        <select id="energia">
+                            <option value="0">Classe F/G (nessun incremento)</option>
+                            <option value="2">Classe E (+2%)</option>
+                            <option value="4">Classe D (+4%)</option>
+                            <option value="6">Classe C (+6%)</option>
+                            <option value="8">Classe B (+8%)</option>
+                            <option value="10">Classe A1 (+10%)</option>
+                            <option value="12">Classe A2 (+12%)</option>
+                            <option value="14">Classe A3 (+14%)</option>
+                            <option value="15">Classe A4 (+15%)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="durata">Tipologia contratto:</label>
+                        <select id="durata">
+                            <option value="0">Contratto 3+2 standard</option>
+                            <option value="4.5">Contratto 4+2 (+4,5%)</option>
+                            <option value="6">Contratto 5+2 (+6%)</option>
+                            <option value="7.5">Contratto 6+ anni (+7,5%)</option>
+                            <option value="15">Contratto studenti (+15%)</option>
+                            <option value="5">Contratto transitorio (+5%)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Sezione Tasse -->
+                <div class="form-section">
+                    <h3>💰 Calcolo Tasse e Confronto</h3>
+                    <div class="form-group">
+                        <label for="valoreCatastale">Valore catastale dell'immobile (€):</label>
+                        <input type="number" id="valoreCatastale" step="100" min="0" placeholder="Es. 150000">
+                        <div class="info-text">Se non disponibile, verrà calcolato automaticamente una stima</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="scontoCanone">Applichi uno sconto di almeno 10% sul canone massimo?</label>
+                        <select id="scontoCanone">
+                            <option value="no">No</option>
+                            <option value="si">Sì (IMU ridotta allo 0,46%)</option>
+                        </select>
+                        <div class="info-text">Lo sconto riduce ulteriormente l'IMU per il canone concordato</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="confrontoCanone">Confronta con canone libero:</label>
+                        <select id="confrontoCanone">
+                            <option value="10">Canone concordato +10%</option>
+                            <option value="25">Canone concordato +25%</option>
+                            <option value="50">Canone concordato +50%</option>
+                            <option value="custom">Inserisci canone personalizzato</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group" id="customRentGroup" style="display: none;">
+                        <label for="customRent">Canone libero mensile (€):</label>
+                        <input type="number" id="customRent" step="10" min="0" placeholder="Es. 1200">
+                        <div class="info-text">Inserisci il canone mensile del mercato libero per il confronto</div>
+                    </div>
+                </div>
+
+                <button class="btn-calculate" onclick="calculateRent()">🧮 Calcola Canone e Tasse</button>
+            </div>
+
+            <div class="results">
+                <div class="result-card">
+                    <h3>📊 Risultati Calcolo</h3>
+                    <div id="results-content">
+                        <p style="text-align: center; color: rgba(255,255,255,0.7); font-style: italic;">
+                            Compila i campi e clicca "Calcola Canone" per vedere i risultati
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Coefficienti di zonizzazione
+        const zoningCoefficients = {
+            centro: { A: [2.00, 13.00], B: [2.00, 11.00], C: [2.00, 7.00] },
+            bobolino: { A: [2.00, 13.50], B: [2.00, 12.00], C: [2.00, 7.50] },
+            poggetto: { A: [2.00, 10.20], B: [2.00, 9.00], C: [2.00, 5.50] },
+            sanjacopino: { A: [2.00, 9.70], B: [2.00, 8.70], C: [2.00, 5.50] },
+            legnaia: { A: [2.00, 9.20], B: [2.00, 8.20], C: [2.00, 5.50] },
+            piagge: { A: [2.00, 8.75], B: [2.00, 8.10], C: [2.00, 5.00] }
+        };
+
+        function calculateConventionalSurface() {
+            const surfaceA = parseFloat(document.getElementById('surfaceA').value) || 0;
+            const surfaceA1 = (parseFloat(document.getElementById('surfaceA1').value) || 0) * 0.3;
+            const surfaceB = (parseFloat(document.getElementById('surfaceB').value) || 0) * 0.5;
+            const surfaceC = (parseFloat(document.getElementById('surfaceC').value) || 0) * 0.25;
+            const surfaceD = (parseFloat(document.getElementById('surfaceD').value) || 0) * 0.3;
+            const surfaceE = (parseFloat(document.getElementById('surfaceE').value) || 0) * 0.25;
+            const surfaceF = (parseFloat(document.getElementById('surfaceF').value) || 0) * 0.2;
+            const surfaceG = (parseFloat(document.getElementById('surfaceG').value) || 0) * 0.05;
+            const surfaceH = (parseFloat(document.getElementById('surfaceH').value) || 0) * 0.25;
+            
+            const surfaceIRaw = parseFloat(document.getElementById('surfaceI').value) || 0;
+            const surfaceIBase = Math.min(surfaceIRaw, surfaceA) * 0.1;
+            const surfaceIExtra = Math.max(0, surfaceIRaw - surfaceA) * 0.02;
+            const surfaceI = surfaceIBase + surfaceIExtra;
+
+            const additionalSurfaces = surfaceA1 + surfaceB + surfaceC + surfaceD + surfaceE + surfaceF + surfaceG + surfaceH + surfaceI;
+            
+            let totalSurface = surfaceA + additionalSurfaces;
+            let warning = '';
+
+            // Applicazione tetti massimi
+            if (surfaceA < 60) {
+                const maxAdditional = surfaceA * 0.2;
+                const maxTotal = Math.min(63, surfaceA + maxAdditional);
+                if (totalSurface > maxTotal) {
+                    totalSurface = maxTotal;
+                    warning = 'Superficie limitata dal tetto massimo (20% per A<60mq)';
+                }
+            } else if (surfaceA <= 65) {
+                const maxAdditional = surfaceA * 0.05;
+                const maxTotal = Math.min(65, surfaceA + maxAdditional);
+                if (totalSurface > maxTotal) {
+                    totalSurface = maxTotal;
+                    warning = 'Superficie limitata dal tetto massimo (5% per A>60mq)';
+                }
+            }
+
+            return { totalSurface, warning };
+        }
+
+        function calculateRent() {
+            const quartiere = document.getElementById('quartiere').value;
+            const tipologia = document.getElementById('tipologia').value;
+            
+            if (!quartiere || !tipologia) {
+                alert('Seleziona quartiere e tipologia alloggio');
+                return;
+            }
+
+            const { totalSurface, warning } = calculateConventionalSurface();
+            
+            if (totalSurface === 0) {
+                alert('Inserisci almeno la superficie interna abitativa');
+                return;
+            }
+
+            // Coefficienti base
+            const coefficients = zoningCoefficients[quartiere][tipologia];
+            const baseMinRent = totalSurface * coefficients[0];
+            const baseMaxRent = totalSurface * coefficients[1];
+
+            // Maggiorazioni
+            const arredo = parseFloat(document.getElementById('arredo').value) || 0;
+            const pregio = parseFloat(document.getElementById('pregio').value) || 0;
+            const energia = parseFloat(document.getElementById('energia').value) || 0;
+            const durata = parseFloat(document.getElementById('durata').value) || 0;
+
+            const totalMaggiorazioni = arredo + pregio + energia + durata;
+
+            // Calcolo finale
+            const finalMinRent = baseMinRent * (1 + totalMaggiorazioni / 100);
+            const finalMaxRent = baseMaxRent * (1 + totalMaggiorazioni / 100);
+
+            // Conteggio caratteristiche Tipologia A
+            let caratteristicheA = 0;
+            if (tipologia === 'A') {
+                const checkboxes = ['condizionamento', 'rifiniture', 'doppiservizi', 'parcheggio', 'spaziesterni', 'allarme', 'portierato', 'fibra', 'blindato', 'ascensore', 'verdi', 'fotovoltaico'];
+                caratteristicheA = checkboxes.filter(id => document.getElementById(id).checked).length;
+            }
+
+            // Calcolo tasse
+            let taxData = null;
+            let valoreCatastale = parseFloat(document.getElementById('valoreCatastale').value);
+            const scontoCanone = document.getElementById('scontoCanone').value;
+            const confrontoCanone = document.getElementById('confrontoCanone').value;
+            
+            // Se non è inserito il valore catastale, lo stimiamo
+            if (!valoreCatastale) {
+                const surfaceA = parseFloat(document.getElementById('surfaceA').value) || 0;
+                valoreCatastale = estimateValoreCatastale(surfaceA, quartiere, tipologia);
+            }
+            
+            if (valoreCatastale > 0) {
+                // Canone concordato annuale (usando il MAX)
+                const canoneAnnualeConcordato = ( finalMaxRent ) * 12;
+                
+                // Calcolo canone libero annuale
+                let canoneAnnualeLibero;
+                if (confrontoCanone === 'custom') {
+                    const customRent = parseFloat(document.getElementById('customRent').value);
+                    if (customRent > 0) {
+                        canoneAnnualeLibero = customRent * 12;
+                    } else {
+                        canoneAnnualeLibero = canoneAnnualeConcordato * 1.1; // Default +10%
+                    }
+                } else {
+                    const percentuale = parseFloat(confrontoCanone) / 100;
+                    canoneAnnualeLibero = canoneAnnualeConcordato * (1 + percentuale);
+                }
+                
+                taxData = calculateTaxes(canoneAnnualeConcordato, canoneAnnualeLibero, valoreCatastale, scontoCanone);
+                taxData.canoneAnnualeConcordato = canoneAnnualeConcordato;
+                taxData.canoneAnnualeLibero = canoneAnnualeLibero;
+            }
+
+            // Mostra risultati
+            displayResults({
+                totalSurface,
+                warning,
+                baseMinRent,
+                baseMaxRent,
+                totalMaggiorazioni,
+                finalMinRent,
+                finalMaxRent,
+                caratteristicheA,
+                tipologia,
+                taxData,
+                valoreCatastale,
+                canoneAnnuale: taxData ? taxData.canoneAnnualeConcordato : 0
+            });
+        }
+
+        function calculateTaxes(canoneAnnualeConcordato, canoneAnnualeLibero, valoreCatastale, scontoCanone) {
+            // Cedolare secca
+            const cedolareConcordato = canoneAnnualeConcordato * 0.10; // 10%
+            const cedolareLibero = canoneAnnualeLibero * 0.21; // 21%
+            
+            // IMU
+            let imuConcordato, imuLibero;
+            if (scontoCanone === 'si') {
+                imuConcordato = valoreCatastale * 0.0046; // 0,46%
+            } else {
+                imuConcordato = valoreCatastale * 0.0057; // 0,57%
+            }
+            imuLibero = valoreCatastale * 0.0106; // 1,06%
+            
+            // Guadagno netto
+            const nettoConcordato = canoneAnnualeConcordato - cedolareConcordato - imuConcordato;
+            const nettoLibero = canoneAnnualeLibero - cedolareLibero - imuLibero;
+            
+            // Totale tasse
+            const tasseConcordato = cedolareConcordato + imuConcordato;
+            const tasseLibero = cedolareLibero + imuLibero;
+            
+            // Percentuale di incremento tasse
+            const incrementoTasse = ((tasseLibero - tasseConcordato) / tasseConcordato) * 100;
+            
+            // Calcolo percentuale di incremento del canone
+            const incrementoCanone = ((canoneAnnualeLibero - canoneAnnualeConcordato) / canoneAnnualeConcordato) * 100;
+            
+            return {
+                cedolareConcordato,
+                cedolareLibero,
+                imuConcordato,
+                imuLibero,
+                nettoConcordato,
+                nettoLibero,
+                tasseConcordato,
+                tasseLibero,
+                incrementoTasse,
+                incrementoCanone
+            };
+        }
+
+        function estimateValoreCatastale(superficie, quartiere, tipologia) {
+            // Stima basata sui valori medi di mercato per zona
+            const valoriMediMq = {
+                centro: { A: 4500, B: 3800, C: 3200 },
+                bobolino: { A: 4200, B: 3500, C: 2900 },
+                poggetto: { A: 3500, B: 2900, C: 2400 },
+                sanjacopino: { A: 3200, B: 2700, C: 2200 },
+                legnaia: { A: 3000, B: 2500, C: 2000 },
+                piagge: { A: 2800, B: 2300, C: 1900 }
+            };
+            
+            const valoreMedio = valoriMediMq[quartiere][tipologia];
+            // Il valore catastale è tipicamente il 70-80% del valore di mercato
+            return superficie * valoreMedio * 0.75;
+        }
+
+        function displayResults(data) {
+            const resultsContent = document.getElementById('results-content');
+            
+            let caratteristicheWarning = '';
+            if (data.tipologia === 'A' && data.caratteristicheA < 6) {
+                caratteristicheWarning = `<div class="warning">⚠️ Per Tipologia A servono almeno 6 caratteristiche (selezionate: ${data.caratteristicheA})</div>`;
+            }
+
+            let surfaceWarning = '';
+            if (data.warning) {
+                surfaceWarning = `<div class="warning">⚠️ ${data.warning}</div>`;
+            }
+
+            // Calcolo tasse se disponibili i dati
+            let taxSection = '';
+            if (data.taxData) {
+                const tx = data.taxData;
+                const risparmioTasse = tx.tasseLibero - tx.tasseConcordato;
+                const risparmioNetto = tx.nettoConcordato - tx.nettoLibero;
+                
+                taxSection = `
+                    <div style="margin-top: 20px; padding-top: 20px; border-top: 2px solid rgba(255,255,255,0.2);">
+                        <h4 style="margin-bottom: 15px; text-align: center;">📊 CONFRONTO TASSE</h4>
+                        
+                        <div class="result-item">
+                            <span>Valore catastale:</span>
+                            <span class="result-value">€${data.valoreCatastale.toLocaleString()}</span>
+                        </div>
+                        
+                        <h5 style="margin: 15px 0 10px 0; color: #4facfe;">🏠 CANONE CONCORDATO</h5>
+                        <div class="result-item">
+                            <span>Canone annuale:</span>
+                            <span class="result-value">€${(tx.canoneAnnualeConcordato).toLocaleString()}</span>
+                        </div>
+                        <div class="result-item">
+                            <span>Cedolare secca (10%):</span>
+                            <span class="result-value">€${tx.cedolareConcordato.toLocaleString()}</span>
+                        </div>
+                        <div class="result-item">
+                            <span>IMU:</span>
+                            <span class="result-value">€${tx.imuConcordato.toLocaleString()}</span>
+                        </div>
+                        <div class="result-item" style="background: rgba(76, 175, 80, 0.2);">
+                            <span><strong>Guadagno netto annuale:</strong></span>
+                            <span class="result-value"><strong>€${tx.nettoConcordato.toLocaleString()}</strong></span>
+                        </div>
+                        
+                        <h5 style="margin: 15px 0 10px 0; color: #ff6b6b;">📈 CANONE LIBERO (+${tx.incrementoCanone.toFixed(1)}%)</h5>
+                        <div class="result-item">
+                            <span>Canone annuale:</span>
+                            <span class="result-value">€${tx.canoneAnnualeLibero.toLocaleString()}</span>
+                        </div>
+                        <div class="result-item">
+                            <span>Cedolare secca (21%):</span>
+                            <span class="result-value">€${tx.cedolareLibero.toLocaleString()}</span>
+                        </div>
+                        <div class="result-item">
+                            <span>IMU (1,06%):</span>
+                            <span class="result-value">€${tx.imuLibero.toLocaleString()}</span>
+                        </div>
+                        <div class="result-item" style="background: rgba(244, 67, 54, 0.2);">
+                            <span><strong>Guadagno netto annuale:</strong></span>
+                            <span class="result-value"><strong>€${tx.nettoLibero.toLocaleString()}</strong></span>
+                        </div>
+                        
+                        <div style="background: linear-gradient(135deg, #ff9a56 0%, #ff6b6b 100%); padding: 15px; border-radius: 10px; margin-top: 15px;">
+                            <div style="text-align: center; margin-bottom: 10px;"><strong>💡 ANALISI RISPARMIO</strong></div>
+                            <div class="result-item" style="background: rgba(255,255,255,0.2);">
+                                <span>Tasse canone concordato:</span>
+                                <span class="result-value">€${tx.tasseConcordato.toLocaleString()}</span>
+                            </div>
+                            <div class="result-item" style="background: rgba(255,255,255,0.2);">
+                                <span>Tasse canone libero:</span>
+                                <span class="result-value">€${tx.tasseLibero.toLocaleString()}</span>
+                            </div>
+                            <div class="result-item" style="background: rgba(255,255,255,0.3); border: 2px solid white;">
+                                <span><strong>Incremento tasse libero:</strong></span>
+                                <span class="result-value"><strong>+${tx.incrementoTasse.toFixed(1)}%</strong></span>
+                            </div>
+                            <div class="result-item" style="background: rgba(255,255,255,0.3); border: 2px solid white;">
+                                <span><strong>Risparmio tasse concordato:</strong></span>
+                                <span class="result-value"><strong>€${risparmioTasse.toLocaleString()}</strong></span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            resultsContent.innerHTML = `
+                <div class="result-item">
+                    <span>Superficie convenzionale:</span>
+                    <span class="result-value">${data.totalSurface.toFixed(2)} mq</span>
+                </div>
+                <div class="result-item">
+                    <span>Canone base min:</span>
+                    <span class="result-value">€${data.baseMinRent.toFixed(2)}</span>
+                </div>
+                <div class="result-item">
+                    <span>Canone base max:</span>
+                    <span class="result-value">€${data.baseMaxRent.toFixed(2)}</span>
+                </div>
+                <div class="result-item">
+                    <span>Maggiorazioni totali:</span>
+                    <span class="result-value">+${data.totalMaggiorazioni.toFixed(1)}%</span>
+                </div>
+                ${surfaceWarning}
+                ${caratteristicheWarning}
+                <div class="final-result">
+                    <div>💰 CANONE MENSILE</div>
+                    <div class="price-range">€${data.finalMinRent.toFixed(2)} - €${data.finalMaxRent.toFixed(2)}</div>
+                    <div style="font-size: 0.9em; opacity: 0.9;">Range di oscillazione applicabile</div>
+                </div>
+                ${taxSection}
+            `;
+        }
+
+        // Mostra/nascondi campo canone personalizzato
+        document.getElementById('confrontoCanone').addEventListener('change', function() {
+            const customGroup = document.getElementById('customRentGroup');
+            if (this.value === 'custom') {
+                customGroup.style.display = 'block';
+            } else {
+                customGroup.style.display = 'none';
+            }
+            
+            // Ricalcola se ci sono già dati
+            if (document.getElementById('quartiere').value && document.getElementById('tipologia').value) {
+                setTimeout(calculateRent, 100);
+            }
+        });
+
+        // Auto-calcolo quando vengono modificati i valori
+        document.addEventListener('input', function(e) {
+            if (e.target.type === 'number' && document.getElementById('quartiere').value && document.getElementById('tipologia').value) {
+                setTimeout(calculateRent, 500);
+            }
+        });
+
+        document.addEventListener('change', function(e) {
+            if (e.target.type === 'select-one' || e.target.type === 'checkbox') {
+                if (document.getElementById('quartiere').value && document.getElementById('tipologia').value) {
+                    setTimeout(calculateRent, 100);
+                }
+            }
+        });
+    </script>
+</body>
+</html>
