@@ -4,4 +4,4 @@ Sito web per calcolare il Canone di Locazione per gli affitti a Firenze, secondo
 Calcolatrice consultabile qui https://nonholamilza.github.io/Calcolatore-Canone-Concordato-Firenze/
 
 **Informazioni Tecniche** <br>
-Questo sito è stato programmato tramite l'utilizzo di del servizio LLM gratuito Claude, il codice è stato revisionato ed è in aggiornamento.
+Questo sito è stato programmato tramite l'utilizzo del servizio di LLM Claude nella versione gratuita, il codice è stato revisionato ed è in aggiornamento.
