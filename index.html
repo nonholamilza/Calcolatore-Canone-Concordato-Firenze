@@ -225,6 +225,93 @@
             margin-top: 5px;
             font-style: italic;
         }
+        
+        .footer {
+            background: #f0F0F0;
+            color: #212121;
+            padding: 40px 20px 20px 20px;
+            margin-top: 60px;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-section {
+            margin-bottom: 0px;
+        }
+
+        .footer-section h4 {
+            color: #212121;
+            margin-bottom: px;
+            font-size: 16px;
+            font-weight: 800;
+            border-bottom: 1px solid #212121;
+            padding-bottom: 1px;
+            display: inline-block;
+        }
+
+        .footer-section p {
+            margin-bottom: 30px;
+            color: #424242;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .organization-list {
+            color: #424242;
+            font-style: regular;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .footer-link {
+            color: #424242;
+            text-decoration: none;
+            padding: 8px 15px;
+            border: 1px solid #424242;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .footer-link:hover {
+            background: #424242;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #34495e;
+            padding-top: 20px;
+            margin-top: 10px;
+            text-align: center;
+            color: #7f8c8d;
+            font-size: 12px;
+        }
+
+        .license-badge {
+            display: inline-block;
+            background: #27ae60;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 16px;
+            font-size: 11px;
+            font-weight: bold;
+            margin-left: 10px;
+        }
 
         @media (max-width: 768px) {
             .content {
@@ -242,6 +329,24 @@
             .container {
                 margin: 10px;
             }
+                        .footer {
+                padding: 30px 15px 15px 15px;
+            }
+            
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .footer-links {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .footer-link {
+                text-align: center;
+            }
+        }
         @media (max-width: 480px) {
             .container {
                 padding: 10px;
@@ -298,7 +403,6 @@
             }
         }
 
-        }
 
         .btn-calculate {
             background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
