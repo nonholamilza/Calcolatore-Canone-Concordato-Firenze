@@ -829,6 +829,106 @@
             piagge: { A: [8.10, 8.75], B: [5.00, 8.10], C: [2.00, 5.00] }
         };
 
+        // Funzioni per URL condivisione
+        function getFormData() {
+            const data = {};
+
+            // Campi select e input principali
+            const fields = [
+                'quartiere', 'tipologia', 'surfaceA', 'surfaceA1', 'surfaceB', 'surfaceC', 
+                'surfaceH', 'surfaceI', 'parkingD', 'parkingE', 'parkingF', 'parkingG',
+                'arredo', 'pregio', 'energia', 'durata', 'valoreCatastale', 'scontoCanone',
+                'confrontoCanone', 'customRent'
+            ];
+
+            fields.forEach(field => {
+                const element = document.getElementById(field);
+                if (element && element.value) {
+                    data[field] = element.value;
+                }
+            });
+
+            // Checkbox delle caratteristiche
+            const checkboxes = [
+                'condizionamento', 'rifiniture', 'doppiservizi', 'parcheggio', 'spaziesterni',
+                'allarme', 'portierato', 'fibra', 'blindato', 'ascensore', 'verdi', 'fotovoltaico'
+            ];
+
+            checkboxes.forEach(checkbox => {
+                const element = document.getElementById(checkbox);
+                if (element && element.checked) {
+                    data[checkbox] = '1';
+                }
+            });
+
+            return data;
+        }
+
+        function loadFromURL() {
+            const urlParams = new URLSearchParams(window.location.search);
+
+            // Carica tutti i parametri dall'URL
+            urlParams.forEach((value, key) => {
+                const element = document.getElementById(key);
+                if (element) {
+                    if (element.type === 'checkbox') {
+                        element.checked = value === '1';
+                        // Trigger dell'evento change per aggiornare gli stili
+                        element.dispatchEvent(new Event('change'));
+                    } else {
+                        element.value = value;
+                    }
+                }
+            });
+
+            // Se ci sono parametri, calcola automaticamente
+            if (urlParams.size > 0) {
+                // Aggiorna le superfici dei parcheggi
+                ['D', 'E', 'F', 'G'].forEach(type => {
+                    updateParkingSurface(type);
+                });
+
+                // Calcola se ci sono i dati minimi
+                setTimeout(() => {
+                    if (document.getElementById('quartiere').value && document.getElementById('tipologia').value) {
+                        calculateRent();
+                    }
+                }, 100);
+            }
+        }
+
+        function copyShareLink() {
+            const formData = getFormData();
+            const params = new URLSearchParams(formData);
+            const shareUrl = window.location.origin + window.location.pathname + '?' + params.toString();
+
+            // Copia negli appunti
+            navigator.clipboard.writeText(shareUrl).then(() => {
+                // Mostra feedback
+                const feedback = document.getElementById('copyFeedback');
+                feedback.style.display = 'block';
+
+                // Nascondi feedback dopo 3 secondi
+                setTimeout(() => {
+                    feedback.style.display = 'none';
+                }, 3000);
+            }).catch(err => {
+                // Fallback per browser che non supportano clipboard API
+                const textArea = document.createElement('textarea');
+                textArea.value = shareUrl;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+
+                const feedback = document.getElementById('copyFeedback');
+                feedback.style.display = 'block';
+                setTimeout(() => {
+                    feedback.style.display = 'none';
+                }, 3000);
+            });
+        }
+
         function calculateConventionalSurface() {
             const surfaceA = parseFloat(document.getElementById('surfaceA').value) || 0;
             const surfaceA1 = (parseFloat(document.getElementById('surfaceA1').value) || 0) * 0.3;
@@ -971,7 +1071,10 @@
                 canoneAnnuale: taxData ? taxData.canoneAnnualeConcordato : 0,
                 scontoApplicato
             });
+            // Mostra la sezione condivisione
+            document.getElementById('shareSection').style.display = 'block';
         }
+
 
         function calculateTaxes(canoneAnnualeConcordato, canoneAnnualeLibero, valoreCatastale, scontoCanone) {
             // Cedolare secca
@@ -1278,6 +1381,21 @@
             // Ricalcola se ci sono già dati
             if (document.getElementById('quartiere').value && document.getElementById('tipologia').value) {
                 setTimeout(calculateRent, 100);
+            }
+        });
+
+        // Auto-calcolo quando vengono modificati i valori
+        document.addEventListener('input', function(e) {
+            if (e.target.type === 'number' && document.getElementById('quartiere').value && document.getElementById('tipologia').value) {
+                setTimeout(calculateRent, 500);
+            }
+        });
+
+        document.addEventListener('change', function(e) {
+            if (e.target.type === 'select-one' || e.target.type === 'checkbox') {
+                if (document.getElementById('quartiere').value && document.getElementById('tipologia').value) {
+                    setTimeout(calculateRent, 100);
+                }
             }
         });
 
