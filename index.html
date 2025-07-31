@@ -4,20 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="title" content="Calcolatore Canone Concordato Firenze" />
-    <meta name="description" content="Scopri gli affitti a canone concordato per Firenze. Una calcolatrice gratuita e semplice da usare per stimare tasse e guadagno netto." />
+    <meta name="description" content="Calcola gli affitti a canone concordato per il comune di Firenze. Una calcolatrice gratuita e accessibile per stimare tasse e guadagno netto." />
 
     <!-- Open Graph / Facebook / WhatsApp -->
       <meta property="og:type" content="website" />
       <meta property="og:url" content="https://nonholamilza.github.io/Calcolatore-Canone-Concordato-Firenze/" />
       <meta property="og:title" content="Calcolatore Canone Concordato Firenze" />
-      <meta property="og:description" content="Scopri gli affitti a canone concordato per Firenze. Una calcolatrice gratuita e semplice da usare per stimare tasse e guadagno netto." />
+      <meta property="og:description" content="Calcola gli affitti a canone concordato per Firenze. Una calcolatrice gratuita e accessibile per stimare tasse e guadagno netto." />
       <meta property="og:image" content="https://nonholamilza.github.io/Calcolatore-Canone-Concordato-Firenze/anteprima.jpg" />
     
     <!-- Twitter -->
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:url" content="https://nonholamilza.github.io/Calcolatore-Canone-Concordato-Firenze/" />
       <meta name="twitter:title" content="Calcolatore Canone Concordato Firenze" />
-      <meta name="twitter:description" content="Scopri gli affitti a canone concordato per Firenze. Una calcolatrice gratuita e semplice da usare per stimare tasse e guadagno netto." />
+      <meta name="twitter:description" content="Scopri gli affitti a canone concordato per Firenze. Una calcolatrice gratuita e accessibile per stimare tasse e guadagno netto." />
       <meta name="twitter:image" content="https://nonholamilza.github.io/Calcolatore-Canone-Concordato-Firenze/anteprima.jpg" />
 
     <title>Calcolatore Canone Concordato Firenze</title>
@@ -29,41 +29,44 @@
         }
 
         body {
+            /*justify-content: center;*/
             font-family: Helvetica, Arial, Verdana, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #7D1F69 100%);
             min-height: 100vh;
-            padding: 0px;
+            padding-top: 10px;
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            background: rgba(255, 255, 255, 0.8);
-            border-radius: 20px;
+            background: rgba(240, 240, 240, 1);
+            border-radius: 8px;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(32px);
             overflow: hidden;
         }
 
         .header {
-            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-            color: white;
-            padding: 30px;
+            /*background: linear-gradient(135deg, #4facfe 33%, #00f2fe 100%);*/
+            color: black;
+            padding: 30px 8px 8px 8px;
             text-align: center;
         }
 
         .header h1 {
             font-size: 2.5em;
             margin-bottom: 10px;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
         .header p {
             font-size: 1.1em;
-            opacity: 0.9;
+            opacity: 1;
         }
 
         .content {
+            max-width: 100%;
+            justify-content: center;
             padding: 30px;
             display: grid;
             grid-template-columns: 1fr 400px;
@@ -72,16 +75,16 @@
 
         .form-section {
             background: white;
-            border-radius: 15px;
+            border-radius: 4px;
             padding: 25px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.10);
             margin-bottom: 20px;
-            border-left: 4px solid #4facfe;
             transition: transform 0.2s ease;
         }
 
         .form-section:hover {
             transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.20);
         }
 
         .form-section h3 {
@@ -108,7 +111,7 @@
             width: 100%;
             padding: 12px;
             border: 2px solid #e1e5e9;
-            border-radius: 10px;
+            border-radius: 4px;
             font-size: 16px;
             transition: all 0.3s ease;
             background: #f8f9fa;
@@ -209,6 +212,26 @@
             margin-bottom: 5px;
         }
 
+        .validation-message {
+            margin-top: 15px;
+            padding: 12px 15px;
+            border-radius: 6px;
+            font-weight: 500;
+            text-align: center;
+        }
+
+        .validation-message.warning {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            color: #856404;
+        }
+
+        .validation-message.success {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+        }
+
         .warning {
             background: #fff3cd;
             color: #856404;
@@ -225,7 +248,7 @@
             margin-top: 5px;
             font-style: italic;
         }
-        
+
         .footer {
             background: #f0F0F0;
             color: #212121;
@@ -329,7 +352,8 @@
             .container {
                 margin: 10px;
             }
-                        .footer {
+
+            .footer {
                 padding: 30px 15px 15px 15px;
             }
             
@@ -347,14 +371,15 @@
                 text-align: center;
             }
         }
+
         @media (max-width: 480px) {
             .container {
-                padding: 10px;
-                border-radius: 12px;
+                margin: 15px;
+                border-radius: 8px;
             }
         
             .header {
-                padding: 20px 10px;
+                padding: 20px 30px;
             }
         
             .header h1 {
@@ -403,13 +428,12 @@
             }
         }
 
-
         .btn-calculate {
             background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
             color: white;
             border: none;
             padding: 15px 30px;
-            border-radius: 10px;
+            border-radius: 4px;
             font-size: 1.1em;
             font-weight: bold;
             cursor: pointer;
@@ -428,7 +452,7 @@
     <div class="container">
         <div class="header">
             <h1>🏠 Calcolatore Canone Concordato</h1>
-            <p>⚜️ Comune di Firenze - Calcolo automatico del canone di locazione concordato</p>
+            <p>⚜️ Comune di Firenze - Calcolo automatico del canone di locazione</p>
         </div>
 
         <div class="content">
@@ -455,55 +479,67 @@
                     <h3>📐 Calcolo Superficie Convenzionale</h3>
                     <div class="surface-grid">
                         <div class="form-group">
-                            <label for="surfaceA">A - Superficie interna utile abitativa (mq):</label>
+                            <label for="surfaceA">Superficie interna utile abitativa (mq):</label>
                             <input type="number" id="surfaceA" step="0.1" min="0">
-                            <div class="info-text">100% - Area effettivamente calpestabile (h≥240cm)</div>
+                            <div class="info-text"><em>A</em> - 100% - Area effettivamente calpestabile (h≥240cm)</div>
                         </div>
                         <div class="form-group">
-                            <label for="surfaceA1">A1 - Superficie bassa (mq):</label>
+                            <label for="surfaceA1">Superficie bassa (mq):</label>
                             <input type="number" id="surfaceA1" step="0.1" min="0">
-                            <div class="info-text">30% - Aree interne h 180-240cm</div>
+                            <div class="info-text"><em>A1</em> - 30% - Aree interne, sottotetto di altezza tra 180-240cm</div>
                         </div>
                         <div class="form-group">
-                            <label for="surfaceB">B - Autorimesse/box auto (mq):</label>
+                            <label for="surfaceB">Autorimesse/box/depositi (mq):</label>
                             <input type="number" id="surfaceB" step="0.1" min="0">
-                            <div class="info-text">50% - Superficie utile autorimesse singole</div>
+                            <div class="info-text"><em>B</em> - 50% - Superficie utile autorimesse singole</div>
                         </div>
                         <div class="form-group">
-                            <label for="surfaceC">C - Lastrici solari attico (mq):</label>
-                            <input type="number" id="surfaceC" step="0.1" min="0">
-                            <div class="info-text">25% - Uso esclusivo piano attico</div>
-                        </div>
-                        <div class="form-group">
-                            <label for="surfaceD">D - Posti auto esclusivi (mq):</label>
-                            <input type="number" id="surfaceD" step="0.1" min="0">
-                            <div class="info-text">30% - Coperti/scoperti in area esclusiva</div>
-                        </div>
-                        <div class="form-group">
-                            <label for="surfaceE">E - Posti auto comuni coperti (mq):</label>
-                            <input type="number" id="surfaceE" step="0.1" min="0">
-                            <div class="info-text">25% - Autorimesse comuni assegnate</div>
-                        </div>
-                        <div class="form-group">
-                            <label for="surfaceF">F - Posti auto comuni scoperti (mq):</label>
-                            <input type="number" id="surfaceF" step="0.1" min="0">
-                            <div class="info-text">20% - Spazi comuni assegnati</div>
-                        </div>
-                        <div class="form-group">
-                            <label for="surfaceG">G - Posti auto turnari (mq):</label>
-                            <input type="number" id="surfaceG" step="0.1" min="0">
-                            <div class="info-text">5% - Rotazione turnaria</div>
-                        </div>
-                        <div class="form-group">
-                            <label for="surfaceH">H - Balconi, terrazze, cantine (mq):</label>
+                            <label for="surfaceH">Balconi, terrazze, cantine (mq):</label>
                             <input type="number" id="surfaceH" step="0.1" min="0">
-                            <div class="info-text">25% - Superficie utile pertinenze</div>
+                            <div class="info-text"><em>H</em> - 25% - Superficie utile pertinenze</div>
                         </div>
                         <div class="form-group">
-                            <label for="surfaceI">I - Superficie scoperta esclusiva (mq):</label>
-                            <input type="number" id="surfaceI" step="0.1" min="0">
-                            <div class="info-text">10% - Corti, giardini in godimento esclusivo</div>
+                            <label for="surfaceC">Lastrici solari attico (mq):</label>
+                            <input type="number" id="surfaceC" step="0.1" min="0">
+                            <div class="info-text"><em>C</em> - 25% - Uso esclusivo piano attico</div>
                         </div>
+                        <div class="form-group">
+                            <label for="surfaceI">Superficie scoperta esclusiva (mq):</label>
+                            <input type="number" id="surfaceI" step="0.1" min="0">
+                            <div class="info-text"><em>I</em> - 10% - Corti, giardini in godimento esclusivo</div>
+                        </div>
+                    </div>
+                    
+                    <h4 style="margin: 25px 0 15px 0; color: #666;">🚗 Posti Auto</h4>
+                    <div class="parking-section">
+                        <div class="surface-grid">
+                            <div class="form-group">
+                                <label for="parkingD">Posti auto esclusivi (n°):</label>
+                                <input type="number" id="parkingD" step="1" min="0" onchange="updateParkingSurface('D')">
+                                <div class="info-text"><em>D</em> - 30% - Coperti/scoperti in area esclusiva (15mq/posto)</div>
+                            </div>
+                            <div class="form-group">
+                                <label for="parkingE">Posti auto comuni coperti (n°):</label>
+                                <input type="number" id="parkingE" step="1" min="0" onchange="updateParkingSurface('E')">
+                                <div class="info-text"><em>E</em> - 25% - Autorimesse comuni assegnate (15mq/posto)</div>
+                            </div>
+                            <div class="form-group">
+                                <label for="parkingF">Posti auto comuni scoperti (n°):</label>
+                                <input type="number" id="parkingF" step="1" min="0" onchange="updateParkingSurface('F')">
+                                <div class="info-text"><em>F</em> - 20% - Spazi comuni assegnati (15mq/posto)</div>
+                            </div>
+                            <div class="form-group">
+                                <label for="parkingG">Posti auto turnari (n°):</label>
+                                <input type="number" id="parkingG" step="1" min="0" onchange="updateParkingSurface('G')">
+                                <div class="info-text"><em>G</em> - 5% - Rotazione turnaria (15mq/posto)</div>
+                            </div>
+                        </div>
+                        
+                        <!-- Campi nascosti per i calcoli -->
+                        <input type="hidden" id="surfaceD" value="0">
+                        <input type="hidden" id="surfaceE" value="0">
+                        <input type="hidden" id="surfaceF" value="0">
+                        <input type="hidden" id="surfaceG" value="0">
                     </div>
                 </div>
 
@@ -514,62 +550,62 @@
                         <label for="tipologia">Tipologia:</label>
                         <select id="tipologia">
                             <option value="">Seleziona tipologia</option>
-                            <option value="A">Tipologia A - Immobili di recente costruzione/ristrutturazione</option>
+                            <option value="A">Tipologia A - Immobili di recente costruzione o ristrutturazione</option>
                             <option value="B">Tipologia B - Immobili con buone caratteristiche</option>
-                            <option value="C">Tipologia C - Immobili con caratteristiche standard</option>
+                            <option value="C">Tipologia C - Immobili con caratteristiche conformi alla normativa vigente</option>
                         </select>
                     </div>
                     
                     <div class="form-group">
-                        <label>Caratteristiche aggiuntive per Tipologia A (almeno 6):</label>
+                        <label>Caratteristiche per rientrare nella Tipologia A: <span id="counter">0</span> / 6:</label>
                         <div class="checkbox-group">
                             <div class="checkbox-item">
-                                <input type="checkbox" id="condizionamento">
-                                <label for="condizionamento">Condizionamento</label>
-                            </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="rifiniture">
-                                <label for="rifiniture">Rifiniture di pregio</label>
-                            </div>
-                            <div class="checkbox-item">
                                 <input type="checkbox" id="doppiservizi">
-                                <label for="doppiservizi">Doppi servizi</label>
+                                <label for="doppiservizi">Doppio bagno</label>
                             </div>
                             <div class="checkbox-item">
-                                <input type="checkbox" id="parcheggio">
-                                <label for="parcheggio">Parcheggio assegnato</label>
-                            </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="spaziesterni">
-                                <label for="spaziesterni">Spazi esterni</label>
-                            </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="allarme">
-                                <label for="allarme">Sistema allarme</label>
-                            </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="portierato">
-                                <label for="portierato">Portierato/Videosorveglianza</label>
+                                <input type="checkbox" id="ascensore">
+                                <label for="ascensore">Ascensore (per abitazioni oltre al terzo piano)</label>
                             </div>
                             <div class="checkbox-item">
                                 <input type="checkbox" id="fibra">
-                                <label for="fibra">Fibra ottica FTTH</label>
+                                <label for="fibra">Copertura fibra ottica FTTH </label> <a href="https://fibermap.it/" target="_blank" style="color: #4facfe;">🔗</a>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="verdi">
+                                <label for="verdi">Spazi verdi condominiali</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="condizionamento">
+                                <label for="condizionamento">Aria Condizionata</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="parcheggio">
+                                <label for="parcheggio">Parcheggio condominale assegnato</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="spaziesterni">
+                                <label for="spaziesterni">Giardino/Spazi esterni esclusivi</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="allarme">
+                                <label for="allarme">Sistema di allarme e/o inferriate</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="portierato">
+                                <label for="portierato">Portierato o Videosorveglianza</label>
                             </div>
                             <div class="checkbox-item">
                                 <input type="checkbox" id="blindato">
                                 <label for="blindato">Portone blindato</label>
                             </div>
                             <div class="checkbox-item">
-                                <input type="checkbox" id="ascensore">
-                                <label for="ascensore">Ascensore</label>
-                            </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="verdi">
-                                <label for="verdi">Spazi verdi</label>
+                                <input type="checkbox" id="rifiniture">
+                                <label for="rifiniture">Finiture pregiate (materiali pregiati, affreschi, arredi di design)</label>
                             </div>
                             <div class="checkbox-item">
                                 <input type="checkbox" id="fotovoltaico">
-                                <label for="fotovoltaico">Fotovoltaico/Solare</label>
+                                <label for="fotovoltaico">Impianto Fotovoltaico/Solare</label>
                             </div>
                         </div>
                     </div>
@@ -675,12 +711,12 @@
             </div>
         </div>
     </div>
-    
+
     <footer class="footer">
         <div class="footer-content">
             <div class="footer-section">
                 <h4>📋 Riferimenti Normativi</h4>
-                <p>Calcoli sui parametri agevolati stabiliti dall'<a target="_blank" rel="noopener noreferrer" href="https://sociale.comune.fi.it/system/files/2025-07/Accorro%20territoriale%20Firenze%20e%20comuni%20limitrofi%20sottoscritto%20il%2003.07.2025%20e%20valido%20dal%2007.07.2025_250704_105950.pdf">Accordo Territoriale sulle locazioni abitative</a> del 03/07/2025 e dalle <a target="_blank" rel="noopener noreferrer" href="https://www.comune.firenze.it/novita/notizie/nuovi-accordi-territoriali-sulle-locazioni-abitative">agevolazioni IMU</a> del comune di Firenze.</p>
+                <p>Calcoli sui parametri stabiliti dall'<a target="_blank" rel="noopener noreferrer" href="https://sociale.comune.fi.it/system/files/2025-07/Accorro%20territoriale%20Firenze%20e%20comuni%20limitrofi%20sottoscritto%20il%2003.07.2025%20e%20valido%20dal%2007.07.2025_250704_105950.pdf">Accordo Territoriale sulle locazioni abitative</a> del 03/07/2025 e dalle <a target="_blank" rel="noopener noreferrer" href="https://www.comune.firenze.it/novita/notizie/nuovi-accordi-territoriali-sulle-locazioni-abitative">agevolazioni IMU</a> del comune di Firenze.</p>
             </div>
 
             <div class="footer-grid">
@@ -708,7 +744,7 @@
                 </p>
                 
                 <div class="footer-links">
-                    <a href="https://github.com/nonholamilza/Calcolatore-Canone-Concordato-Firenze" target="_blank" class="footer-link">
+                    <a href="https://github.com/nonholamilza/canone-concordato-firenze" target="_blank" class="footer-link">
                         🔗 Repository Github
                     </a>
                     <a href="https://www.gnu.org/licenses/gpl-3.0.html" target="_blank" class="footer-link">
@@ -724,17 +760,15 @@
         </div>
     </footer>
 
-
-
     <script>
         // Coefficienti di zonizzazione
         const zoningCoefficients = {
-            centro: { A: [2.00, 13.00], B: [2.00, 11.00], C: [2.00, 7.00] },
-            bobolino: { A: [2.00, 13.50], B: [2.00, 12.00], C: [2.00, 7.50] },
-            poggetto: { A: [2.00, 10.20], B: [2.00, 9.00], C: [2.00, 5.50] },
-            sanjacopino: { A: [2.00, 9.70], B: [2.00, 8.70], C: [2.00, 5.50] },
-            legnaia: { A: [2.00, 9.20], B: [2.00, 8.20], C: [2.00, 5.50] },
-            piagge: { A: [2.00, 8.75], B: [2.00, 8.10], C: [2.00, 5.00] }
+            centro: { A: [11.00, 13.00], B: [7.00, 11.00], C: [2.00, 7.00] },
+            bobolino: { A: [12.00, 13.50], B: [7.50, 12.00], C: [2.00, 7.50] },
+            poggetto: { A: [9.00, 10.20], B: [5.50, 9.00], C: [2.00, 5.50] },
+            sanjacopino: { A: [8.70, 9.70], B: [5.50, 8.70], C: [2.00, 5.50] },
+            legnaia: { A: [8.20, 9.20], B: [5.50, 8.20], C: [2.00, 5.50] },
+            piagge: { A: [8.10, 8.75], B: [5.00, 8.10], C: [2.00, 5.00] }
         };
 
         function calculateConventionalSurface() {
@@ -808,8 +842,19 @@
             const totalMaggiorazioni = arredo + pregio + energia + durata;
 
             // Calcolo finale
-            const finalMinRent = baseMinRent * (1 + totalMaggiorazioni / 100);
-            const finalMaxRent = baseMaxRent * (1 + totalMaggiorazioni / 100);
+            let finalMinRent = baseMinRent * (1 + totalMaggiorazioni / 100);
+            let finalMaxRent = baseMaxRent * (1 + totalMaggiorazioni / 100);
+
+            // Applicazione sconto del 10% se selezionato
+            const scontoCanone = document.getElementById('scontoCanone').value;
+            let finalMaxRentForTax = finalMaxRent; // Valore per calcolo tasse
+            let scontoApplicato = false;
+
+            if (scontoCanone === 'si') {
+                finalMaxRentForTax = finalMaxRent * 0.90; // Sconto 10% per calcoli IMU
+                finalMaxRent = finalMaxRentForTax; // Mostra il valore scontato anche nei risultati
+                scontoApplicato = true;
+            }
 
             // Conteggio caratteristiche Tipologia A
             let caratteristicheA = 0;
@@ -821,7 +866,6 @@
             // Calcolo tasse
             let taxData = null;
             let valoreCatastale = parseFloat(document.getElementById('valoreCatastale').value);
-            const scontoCanone = document.getElementById('scontoCanone').value;
             const confrontoCanone = document.getElementById('confrontoCanone').value;
             
             // Se non è inserito il valore catastale, lo stimiamo
@@ -831,8 +875,8 @@
             }
             
             if (valoreCatastale > 0) {
-                // Canone concordato annuale (usando il MAX)
-                const canoneAnnualeConcordato = ( finalMaxRent ) * 12;
+                // Canone concordato annuale (usando il valore con sconto se applicato)
+                const canoneAnnualeConcordato = finalMaxRentForTax * 12;
                 
                 // Calcolo canone libero annuale
                 let canoneAnnualeLibero;
@@ -866,7 +910,8 @@
                 tipologia,
                 taxData,
                 valoreCatastale,
-                canoneAnnuale: taxData ? taxData.canoneAnnualeConcordato : 0
+                canoneAnnuale: taxData ? taxData.canoneAnnualeConcordato : 0,
+                scontoApplicato
             });
         }
 
@@ -876,13 +921,13 @@
             const cedolareLibero = canoneAnnualeLibero * 0.21; // 21%
             
             // IMU
-            let imuConcordato, imuLibero;
+            let imuConcordato;
             if (scontoCanone === 'si') {
                 imuConcordato = valoreCatastale * 0.0046; // 0,46%
             } else {
                 imuConcordato = valoreCatastale * 0.0057; // 0,57%
             }
-            imuLibero = valoreCatastale * 0.0106; // 1,06%
+            const imuLibero = valoreCatastale * 0.0106; // 1,06%
             
             // Guadagno netto
             const nettoConcordato = canoneAnnualeConcordato - cedolareConcordato - imuConcordato;
@@ -912,8 +957,20 @@
             };
         }
 
+        // Aggiorna superficie parcheggi basata sul numero di posti
+        function updateParkingSurface(type) {
+            const numPosti = parseFloat(document.getElementById(`parking${type}`).value) || 0;
+            const superficie = numPosti * 15; // 15 mq per posto
+            document.getElementById(`surface${type}`).value = superficie;
+            
+            // Ricalcola se ci sono già dati
+            if (document.getElementById('quartiere').value && document.getElementById('tipologia').value) {
+                setTimeout(calculateRent, 100);
+            }
+        }
+
         function estimateValoreCatastale(superficie, quartiere, tipologia) {
-            // Stima basata sui valori medi di mercato per zona
+            // Stima basata sui valori medi €/mq per zona
             const valoriMediMq = {
                 centro: { A: 4500, B: 3800, C: 3200 },
                 bobolino: { A: 4200, B: 3500, C: 2900 },
@@ -924,9 +981,111 @@
             };
             
             const valoreMedio = valoriMediMq[quartiere][tipologia];
-            // Il valore catastale è tipicamente il 70-80% del valore di mercato
-            return superficie * valoreMedio * 0.75;
+            // Il valore catastale è calcolato con il 65% del valore di mercato
+            return superficie * valoreMedio * 0.65;
         }
+
+        // Elementi DOM per arrivare a 6 elementi classe A
+        const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        const counter = document.getElementById('counter');
+        const counterDisplay = document.getElementById('counterDisplay');
+        const progressFill = document.getElementById('progressFill');
+        const validationMessage = document.getElementById('validationMessage');
+        const checkboxItems = document.querySelectorAll('.checkbox-item');
+
+        // Funzione per aggiornare il conteggio
+        function updateCounter() {
+            const checkedCount = document.querySelectorAll('input[type="checkbox"]:checked').length;
+            const totalCount = checkboxes.length;
+            
+            // Aggiorna il contatore
+            counter.textContent = checkedCount;
+            
+            // Aggiorna la barra di progresso
+            if (progressFill) {
+                const progressPercentage = (checkedCount / totalCount) * 100;
+                progressFill.style.width = progressPercentage + '%';
+            }
+            
+            // Cambia stile del display in base al raggiungimento dell'obiettivo
+            if (counterDisplay) {
+                if (checkedCount >= 6) {
+                    counterDisplay.classList.add('success');
+                    showValidationMessage('✅ Requisiti soddisfatti! L\'immobile rientra nella Tipologia A', 'success');
+                } else {
+                    counterDisplay.classList.remove('success');
+                    const remaining = 6 - checkedCount;
+                    showValidationMessage(`⚠️ Mancano ancora ${remaining} caratteristiche per raggiungere la Tipologia A`, 'warning');
+                }
+            }
+        }
+
+        // Funzione per mostrare messaggi di validazione
+        function showValidationMessage(message, type) {
+            if (validationMessage) {
+                validationMessage.textContent = message;
+                validationMessage.className = `validation-message ${type}`;
+                validationMessage.style.display = 'block';
+            }
+        }
+
+        // Aggiunge event listener per ogni checkbox
+        checkboxes.forEach((checkbox, index) => {
+            checkbox.addEventListener('change', function() {
+                const checkboxItem = checkboxItems[index];
+                
+                // Aggiunge/rimuove classe per lo stile
+                if (this.checked) {
+                    checkboxItem.classList.add('checked');
+                } else {
+                    checkboxItem.classList.remove('checked');
+                }
+                
+                // Aggiorna il conteggio
+                updateCounter();
+            });
+        });
+
+        // Event listener per rendere clickabile tutto il div checkbox-item
+        checkboxItems.forEach((item, index) => {
+            item.addEventListener('click', function(e) {
+                // Evita il doppio click se si clicca direttamente sulla checkbox
+                if (e.target.type !== 'checkbox' && e.target.tagName !== 'LABEL' && e.target.tagName !== 'A') {
+                    const checkbox = checkboxes[index];
+                    checkbox.checked = !checkbox.checked;
+                    
+                    // Trigger dell'evento change
+                    checkbox.dispatchEvent(new Event('change'));
+                }
+            });
+        });
+
+        // Inizializza il contatore
+        updateCounter();
+
+        // Funzione per ottenere i risultati (utile per integrazioni future)
+        function getSelectedFeatures() {
+            const selected = [];
+            checkboxes.forEach(checkbox => {
+                if (checkbox.checked) {
+                    const label = document.querySelector(`label[for="${checkbox.id}"]`).textContent;
+                    selected.push({
+                        id: checkbox.id,
+                        label: label
+                    });
+                }
+            });
+            return selected;
+        }
+
+        // Funzione per verificare se soddisfa i requisiti
+        function meetsRequirements() {
+            return document.querySelectorAll('input[type="checkbox"]:checked').length >= 6;
+        }
+
+        // Rende le funzioni disponibili globalmente per uso esterno
+        window.getSelectedFeatures = getSelectedFeatures;
+        window.meetsRequirements = meetsRequirements;
 
         function displayResults(data) {
             const resultsContent = document.getElementById('results-content');
@@ -941,12 +1100,16 @@
                 surfaceWarning = `<div class="warning">⚠️ ${data.warning}</div>`;
             }
 
+            let scontoMessage = '';
+            if (data.scontoApplicato) {
+                scontoMessage = `<div style="background: rgba(235, 235, 235, 0.8); padding: 10px; border-radius: 8px; margin: 10px 0; color: #2e7d32; font-weight: bold;">✅ Sconto 10% applicato al canone massimo</div>`;
+            }
+
             // Calcolo tasse se disponibili i dati
             let taxSection = '';
             if (data.taxData) {
                 const tx = data.taxData;
                 const risparmioTasse = tx.tasseLibero - tx.tasseConcordato;
-                const risparmioNetto = tx.nettoConcordato - tx.nettoLibero;
                 
                 taxSection = `
                     <div style="margin-top: 20px; padding-top: 20px; border-top: 2px solid rgba(255,255,255,0.2);">
@@ -1035,6 +1198,7 @@
                 </div>
                 ${surfaceWarning}
                 ${caratteristicheWarning}
+                ${scontoMessage}
                 <div class="final-result">
                     <div>💰 CANONE MENSILE</div>
                     <div class="price-range">€${data.finalMinRent.toFixed(2)} - €${data.finalMaxRent.toFixed(2)}</div>
